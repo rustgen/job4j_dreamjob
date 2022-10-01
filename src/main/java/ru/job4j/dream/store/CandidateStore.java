@@ -1,15 +1,8 @@
 package ru.job4j.dream.store;
 
-import org.thymeleaf.ITemplateEngine;
-import org.thymeleaf.context.WebContext;
 import ru.job4j.dream.model.Candidate;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

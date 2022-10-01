@@ -30,6 +30,7 @@
                 <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
                 <a class="nav-item nav-link" th:href="@{/formAddPost}">Добавить вакансию</a>
                 <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
+                <a class="nav-item nav-link" th:href="@{/formAddPost}">Добавить кандидата</a>
             </div>
         </div>
     </nav>
@@ -48,7 +49,7 @@
                 <td th:text="${post.id}"></td>
                 <td th:text="${post.name}"></td>
                 <td th:text="${post.description}"></td>
-                <td th:text="${#temporals.format(candidate.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
+                <td th:text="${#temporals.format(post.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
             </tr>
             </tbody>
         </table>
