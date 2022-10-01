@@ -1,10 +1,8 @@
-package ru.job4j.dream.store;
+package ru.job4j.dreamjob.store;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import ru.job4j.dream.model.Post;
+import ru.job4j.dreamjob.model.Post;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

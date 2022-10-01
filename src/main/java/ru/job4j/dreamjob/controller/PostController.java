@@ -1,7 +1,7 @@
-package ru.job4j.dream.controller;
+package ru.job4j.dreamjob.controller;
 
-import ru.job4j.dream.model.Post;
-import ru.job4j.dream.store.PostStore;
+import ru.job4j.dreamjob.model.Post;
+import ru.job4j.dreamjob.store.PostStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
