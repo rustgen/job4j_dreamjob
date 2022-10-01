@@ -47,24 +47,7 @@
                 <td th:text="${candidate.id}"></td>
                 <td th:text="${candidate.name}"></td>
                 <td th:text="${candidate.description}"></td>
-                <td th:text="${candidate.created}"></td>
-<!--                <td th:text="${#dates.dayOfWeekName(standardDate)}"></td>-->
-<!--                <td th:text="${#dates.dayOfWeekName(candidate.created)}"></td>-->
-<!--                <td th:text="${#dates.formatISO(candidate.created)}"></td>-->
-<!--                <td th:text="${#dates.formatISO(standardDate)}"></td>-->
-<!--                <td><<p th:text="${#dates.formatISO(candidate.created)}"></p> </td>-->
-<!--                <td><<p th:text="${#dates.formatISO(standardDate)}"></p> </td>-->
-<!--                <td th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy HH:mm')}"></td>-->
-<!--                <td th:text="${#dates.format(candidate.created,'MM-dd-yyyy')}"></td>-->
-<!--                <td th:text="${#dates.format(localDateTime,'MM-dd-yyyy')}"></td>-->
-<!--                <td th:text="${#dates.format(candidate.created,'MM-dd-yyyy')}"></td>-->
-<!--                <td th:text="${candidate.created}"></td>-->
-<!--                <td th:text="${#calendars.format(candidate.created,'dd MMMM yyyy')}"></td>-->
-<!--                <td <span-->
-<!--                        th:with="df=#{date.format}"-->
-<!--                        th:text="${#calendars.format(candidate.created,df)}"></span>-->
-<!--            ></td>-->
-<!--                <span th:text="${#calendars.format(today,'dd MMMM yyyy')}">13 May 2011</span>-->
+                <td th:text="${#temporals.format(candidate.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
             </tr>
             </tbody>
         </table>

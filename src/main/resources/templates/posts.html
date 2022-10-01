@@ -48,7 +48,7 @@
                 <td th:text="${post.id}"></td>
                 <td th:text="${post.name}"></td>
                 <td th:text="${post.description}"></td>
-                <td th:text="${post.created}"></td>
+                <td th:text="${#temporals.format(candidate.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
             </tr>
             </tbody>
         </table>
