@@ -29,18 +29,12 @@ public class PostController {
 
     @PostMapping("/createPost")
     public String createPost(@ModelAttribute Post post) {
-        if (post.getCreated() == null) {
-            post.setCreated(LocalDateTime.now());
-        }
         store.add(post);
         return "redirect:/posts";
     }
 
     @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post) {
-        if (post.getCreated() == null) {
-            post.setCreated(LocalDateTime.now());
-        }
         store.update(post);
         return "redirect:/posts";
     }

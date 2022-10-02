@@ -31,18 +31,12 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate) {
-        if (candidate.getCreated() == null) {
-            candidate.setCreated(LocalDateTime.now());
-        }
         store.add(candidate);
         return "redirect:/candidates";
     }
 
     @PostMapping("/updateCandidate")
     public String updateCandidate(@ModelAttribute Candidate candidate) {
-        if (candidate.getCreated() == null) {
-            candidate.setCreated(LocalDateTime.now());
-        }
         store.update(candidate);
         return "redirect:/candidates";
     }

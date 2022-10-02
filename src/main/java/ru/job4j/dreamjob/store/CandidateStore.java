@@ -42,6 +42,6 @@ public class CandidateStore {
     }
 
     public void update(Candidate candidate) {
-        candidates.computeIfPresent(candidate.getId(), (integer, c) -> candidate);
+        candidates.replace(candidate.getId(), candidate);
     }
 }

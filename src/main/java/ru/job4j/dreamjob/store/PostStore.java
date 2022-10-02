@@ -42,6 +42,6 @@ public class PostStore {
     }
 
     public void update(Post post) {
-        posts.computeIfPresent(post.getId(), (integer, p) -> post);
+        posts.replace(post.getId(), post);
     }
 }
