@@ -38,6 +38,9 @@ public class PostController {
 
     @PostMapping("/updatePost")
     public String updatePost(@ModelAttribute Post post) {
+        if (post.getCreated() == null) {
+            post.setCreated(LocalDateTime.now());
+        }
         store.update(post);
         return "redirect:/posts";
     }

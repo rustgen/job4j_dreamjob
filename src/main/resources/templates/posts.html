@@ -54,9 +54,12 @@
                     </a>
                     <span th:text="${post.name}"></span>
                 </td>
-                <td th:text="${post.id}"></td>
-                <td th:text="${post.name}"></td>
-                <td th:text="${post.description}"></td>
+                <td>
+                    <a th:href="@{|/formUpdatePost/${post.id}|}">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <span th:text="${post.description}"></span>
+                </td>
                 <td th:text="${#temporals.format(post.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
             </tr>
             </tbody>
