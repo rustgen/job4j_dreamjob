@@ -40,14 +40,14 @@
                 New vacancy
             </div>
             <div class="card-body">
-                <form>
+                <form th:action="@{/createPost}" method="POST">
+                    <input type="hidden" name="id" value="0"/>
+                    <input type="hidden" description="id" value="0"/>
                     <div class="form-group">
-                        <label>Name
-                            <input type="text" class="form-control">
-                        </label>
-                        <label>Description
-                            <input type="text" class="form-control">
-                        </label>
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="put the name">
+                        <label for="description">Description</label>
+                        <input type="text" class="form-control" description="description" id="description" placeholder="put the description">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
