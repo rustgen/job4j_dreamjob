@@ -43,6 +43,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date created</th>
+                <th scope="col">City</th>
             </tr>
             </thead>
             <tbody>
@@ -73,6 +74,18 @@
                     </span>
                 </td>
                 <td th:text="${#temporals.format(post.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
+                <td>
+                    <a th:href="@{|/formUpdatePost/${post.id}|}">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <span th:text="${post.city.name}"></span>
+                    <span th:if="${post.visible}">
+                    <i class="fa fa-check-square-o"></i>
+                    </span>
+                    <span th:if="${!post.visible}">
+                    <i class="fa fa-square-o"></i>
+                    </span>
+                </td>
             </tr>
             </tbody>
         </table>
