@@ -53,12 +53,24 @@
                         <i class="fa fa-edit"></i>
                     </a>
                     <span th:text="${post.name}"></span>
+                    <span th:if="${post.visible}">
+                    <i class="fa fa-check-square-o"></i>
+                    </span>
+                    <span th:if="${!post.visible}">
+                    <i class="fa fa-square-o"></i>
+                    </span>
                 </td>
                 <td>
                     <a th:href="@{|/formUpdatePost/${post.id}|}">
                         <i class="fa fa-edit"></i>
                     </a>
                     <span th:text="${post.description}"></span>
+                    <span th:if="${post.visible}">
+                    <i class="fa fa-check-square-o"></i>
+                    </span>
+                    <span th:if="${!post.visible}">
+                    <i class="fa fa-square-o"></i>
+                    </span>
                 </td>
                 <td th:text="${#temporals.format(post.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
             </tr>
