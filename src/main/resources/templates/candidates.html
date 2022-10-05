@@ -43,6 +43,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Date created</th>
+                <th scope="col">Photo of candidate</th>
             </tr>
             </thead>
             <tbody>
@@ -61,6 +62,10 @@
                     <span th:text="${candidate.description}"></span>
                 </td>
                 <td th:text="${#temporals.format(candidate.created, 'dd-MMMM-yyyy', new java.util.Locale('en', 'EN'))}"></td>
+                <td>
+                    <img th:width="150" th:high="150" th:src="@{|/photoCandidate/${candidate.id}|}">
+                    <span th:text="${candidate.name}"></span>
+                </td>
             </tr>
             </tbody>
         </table>
