@@ -4,25 +4,26 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.model.City;
-import ru.job4j.dreamjob.model.Post;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CandidateDBStore {
 
     private static final Logger LOG = LogManager.getLogger(PostDBStore.class.getName());
-    private static final String FIND_ALL = "SELECT * FROM candidate";
-    private static final String ADD = "INSERT INTO candidate(name, description, created, "
-            + "photo) VALUES (?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE candidate SET name = ?, description = ?, created = ?, "
-            + "photo = ?, where id = ?";
-    private static final String FIND_BY_ID = "SELECT * FROM candidate WHERE id = ?";
+    private static final String FIND_ALL = """
+                                   SELECT * FROM candidate
+                                   """;
+    private static final String ADD = """
+             INSERT INTO candidate(name, description, created, photo) VALUES (?, ?, ?, ?)
+             """;
+    private static final String UPDATE = """
+            UPDATE candidate SET name = ?, description = ?, created = ?, photo = ?, where id = ?
+            """;
+    private static final String FIND_BY_ID = """
+    SELECT * FROM candidate WHERE id = ?
+    """;
 
     private final BasicDataSource pool;
 
@@ -37,13 +38,7 @@ public class CandidateDBStore {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    Candidate candidate = new Candidate(
-                            it.getInt("id"),
-                            it.getString("name"),
-                            it.getString("description"),
-                            it.getTimestamp("created").toLocalDateTime()
-                    );
-                    candidate.setPhoto(it.getBytes("photo"));
+                    Candidate candidate = getSqlCandidateParam(it);
                     candidates.add(candidate);
                 }
             }
@@ -58,10 +53,7 @@ public class CandidateDBStore {
              PreparedStatement ps =  cn.prepareStatement(ADD,
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setString(1, candidate.getName());
-            ps.setString(2, candidate.getDescription());
-            ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
-            ps.setBytes(4, candidate.getPhoto());
+            setSqlCandidateParam(ps, candidate);
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -77,10 +69,7 @@ public class CandidateDBStore {
     public void update(Candidate candidate) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement(UPDATE)) {
-            ps.setString(1, candidate.getName());
-            ps.setString(2, candidate.getDescription());
-            ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
-            ps.setBytes(4, candidate.getPhoto());
+            setSqlCandidateParam(ps, candidate);
             ps.executeUpdate();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -99,19 +88,30 @@ public class CandidateDBStore {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    Candidate candidate = new Candidate(
-                            it.getInt("id"),
-                            it.getString("name"),
-                            it.getString("description"),
-                            it.getTimestamp("created").toLocalDateTime()
-                    );
-                    candidate.setPhoto(it.getBytes("photo"));
-                    return candidate;
+                    return getSqlCandidateParam(it);
                 }
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
         return null;
+    }
+
+    private void setSqlCandidateParam(PreparedStatement ps, Candidate candidate) throws SQLException {
+        ps.setString(1, candidate.getName());
+        ps.setString(2, candidate.getDescription());
+        ps.setTimestamp(3, Timestamp.valueOf(candidate.getCreated()));
+        ps.setBytes(4, candidate.getPhoto());
+    }
+
+    private Candidate getSqlCandidateParam(ResultSet it) throws SQLException {
+        Candidate candidate = new Candidate(
+                it.getInt("id"),
+                it.getString("name"),
+                it.getString("description"),
+                it.getTimestamp("created").toLocalDateTime()
+        );
+        candidate.setPhoto(it.getBytes("photo"));
+        return candidate;
     }
 }
