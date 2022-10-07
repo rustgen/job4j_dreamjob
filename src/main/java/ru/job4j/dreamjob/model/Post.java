@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -22,6 +23,10 @@ public class Post implements Serializable {
         this.description = description;
         this.created = created;
         this.city = city;
+    }
+
+    public Post(int id, String name, String description, Date created, boolean visible, int city_id) {
+
     }
 
     public boolean isVisible() {
