@@ -42,14 +42,14 @@ public class PostDBStore {
                             it.getString("name"),
                             it.getString("description"),
                             it.getTimestamp("created").toLocalDateTime(),
-                            new City(it.getInt("city_id"), it.getString("city.name"))
+                            new City(it.getInt("city_id"), "")
                     );
                     post.setVisible(it.getBoolean("visible"));
                     posts.add(post);
                 }
             }
         } catch (Exception e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
         }
         return posts;
     }
@@ -71,7 +71,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
         }
         return post;
     }
@@ -92,7 +92,7 @@ public class PostDBStore {
                 }
             }
         } catch (Exception e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -108,14 +108,14 @@ public class PostDBStore {
                             it.getString("name"),
                             it.getString("description"),
                             it.getTimestamp("created").toLocalDateTime(),
-                            new City(it.getInt("city_id"), it.getString("city.name"))
+                            new City(it.getInt("city_id"), null)
                     );
                     post.setVisible(it.getBoolean("visible"));
                     return post;
                 }
             }
         } catch (Exception e) {
-            LOG.error(e);
+            LOG.error(e.getMessage(), e);
         }
         return null;
     }
