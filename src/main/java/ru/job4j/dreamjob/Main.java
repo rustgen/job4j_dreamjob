@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Objects;
 import java.util.Properties;
 
 @SpringBootApplication
@@ -15,8 +16,8 @@ public class Main {
         Properties cfg = new Properties();
         try (BufferedReader io = new BufferedReader(
                 new InputStreamReader(
-                        Main.class.getClassLoader()
-                                .getResourceAsStream("db.properties")
+                        Objects.requireNonNull(Main.class.getClassLoader()
+                                .getResourceAsStream("db.properties"))
                 )
         )) {
             cfg.load(io);

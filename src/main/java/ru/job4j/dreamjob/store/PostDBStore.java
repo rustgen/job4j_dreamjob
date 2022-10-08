@@ -1,5 +1,6 @@
 package ru.job4j.dreamjob.store;
 
+import net.jcip.annotations.ThreadSafe;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@ThreadSafe
 public class PostDBStore {
 
     private static final Logger LOG = LogManager.getLogger(PostDBStore.class.getName());

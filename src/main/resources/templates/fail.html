@@ -14,6 +14,7 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
     <title>Job of the Dream</title>
 </head>
 <body>
@@ -29,29 +30,36 @@
                 <a class="nav-item nav-link" th:href="@{/posts}">Vacancies</a>
                 <a class="nav-item nav-link" th:href="@{/formAddPost}">Add a vacancy</a>
                 <a class="nav-item nav-link" th:href="@{/candidates}">Candidates</a>
-                <a class="nav-item nav-link active" th:href="@{/formAddCandidate}">Add a candidate</a>
-                <a class="nav-item nav-link" th:href="@{/formAddNewUser}">Register new user</a>
+                <a class="nav-item nav-link" th:href="@{/formAddCandidate}">Add a candidate</a>
+                <a class="nav-item nav-link active" th:href="@{/formAddNewUser}">Register new user</a>
             </div>
         </div>
     </nav>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                New candidate
+                New user
             </div>
             <div class="card-body">
-                <form th:action="@{/createCandidate}" method="POST" enctype="multipart/form-data">
+                <form th:action="@{/fail}" method="POST">
                     <input type="hidden" name="id" value="0"/>
-                    <input type="hidden" description="id" value="0"/>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="put the name">
-                        <label for="description">Description</label>
-                        <input type="text" class="form-control" name="description" id="description" placeholder="put the description">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="put the email">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" name="password" id="password" placeholder="put the password">
                     </div>
-                    <div class="form-group">
-                        <label for="name">Upload Photo</label>
-                        <input type="file" class="form-control" name="file" id="file">
+                    <div class="cosmos-alert cosmos-alert-error">
+                        <div class="cosmos-alert-icon">
+                            <span class="comet-icon comet-icon-wrongline ">
+                                <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" aria-hidden="false" focusable="false">
+                                    <path d="M512 85.333333c235.637333 0 426.666667 191.029333 426.666667 426.666667S747.637333 938.666667 512 938.666667 85.333333 747.637333 85.333333 512 276.362667 85.333333 512 85.333333z m0 64c-200.298667 0-362.666667 162.368-362.666667 362.666667s162.368 362.666667 362.666667 362.666667 362.666667-162.368 362.666667-362.666667-162.368-362.666667-362.666667-362.666667z"></path>
+                                    <path d="M361.376 361.376a32 32 0 0 1 43.712-1.44l1.536 1.44 256 256a32 32 0 0 1-43.712 46.688l-1.536-1.44-256-256a32 32 0 0 1 0-45.248z"></path>
+                                    <path d="M617.376 361.376a32 32 0 0 1 46.688 43.712l-1.44 1.536-256 256a32 32 0 0 1-46.688-43.712l1.44-1.536 256-256z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="cosmos-alert-message">Your account email or password is incorrect.</div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Save</button>
                 </form>
