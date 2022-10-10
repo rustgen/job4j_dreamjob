@@ -12,7 +12,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import ru.job4j.dreamjob.session.UserSession;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
@@ -27,13 +29,15 @@ public class CandidateController {
     }
 
     @GetMapping("/candidates")
-    public String candidates(Model model) {
+    public String candidates(Model model, HttpSession session) {
+        UserSession.getSession(model, session);
         model.addAttribute("candidates", candidateService.findAll());
         return "candidates";
     }
 
     @GetMapping("/formAddCandidate")
-    public String formAddCandidate(Model model) {
+    public String formAddCandidate(Model model, HttpSession session) {
+        UserSession.getSession(model, session);
         model.addAttribute("candidate", new Candidate(0, "Fill in the field",
                 "Fill in the field", LocalDateTime.now()));
         return "addCandidate";
@@ -41,7 +45,9 @@ public class CandidateController {
 
     @PostMapping("/createCandidate")
     public String createCandidate(@ModelAttribute Candidate candidate,
-                                  @RequestParam("file") MultipartFile file) throws IOException {
+                                  @RequestParam("file") MultipartFile file,
+                                  Model model, HttpSession session) throws IOException {
+        UserSession.getSession(model, session);
         candidate.setPhoto(file.getBytes());
         candidateService.add(candidate);
         return "redirect:/candidates";
@@ -49,20 +55,26 @@ public class CandidateController {
 
     @PostMapping("/updateCandidate")
     public String updateCandidate(@ModelAttribute Candidate candidate,
-                                  @RequestParam("file") MultipartFile file) throws IOException {
+                                  @RequestParam("file") MultipartFile file,
+                                  Model model, HttpSession session) throws IOException {
+        UserSession.getSession(model, session);
         candidate.setPhoto(file.getBytes());
         candidateService.update(candidate);
         return "redirect:/candidates";
     }
 
     @GetMapping("/formUpdateCandidate/{candidateId}")
-    public String formUpdateCandidate(Model model, @PathVariable("candidateId") int id) {
+    public String formUpdateCandidate(Model model, @PathVariable("candidateId") int id,
+                                      HttpSession session) {
+        UserSession.getSession(model, session);
         model.addAttribute("candidate", candidateService.findById(id));
         return "updateCandidate";
     }
 
     @GetMapping("/photoCandidate/{candidateId}")
-    public ResponseEntity<Resource> download(@PathVariable("candidateId") Integer candidateId) {
+    public ResponseEntity<Resource> download(@PathVariable("candidateId") Integer candidateId,
+                                             Model model, HttpSession session) {
+        UserSession.getSession(model, session);
         Candidate candidate = candidateService.findById(candidateId);
         return ResponseEntity.ok()
                 .headers(new HttpHeaders())
