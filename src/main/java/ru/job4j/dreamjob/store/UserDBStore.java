@@ -20,6 +20,9 @@ public class UserDBStore {
     private static final String ADD = """
     INSERT INTO users (email, password) VALUES (?, ?)
     """;
+    private static final String FIND = """
+    SELECT * FROM users WHERE email = ? AND password = ?
+    """;
 
     private final BasicDataSource pool;
 
@@ -42,6 +45,31 @@ public class UserDBStore {
                 }
             }
             optional = Optional.of(user);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return optional;
+    }
+
+    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+        Optional<User> optional = Optional.empty();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement(FIND,
+                     PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    User user = new User(
+                            id.getInt("id"),
+                            id.getString("email"),
+                            id.getString("password")
+                    );
+                    optional = Optional.of(user);
+                }
+            }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
