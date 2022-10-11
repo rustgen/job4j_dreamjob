@@ -44,3 +44,4 @@ public class PostStore {
         posts.replace(post.getId(), post);
     }
 }
+

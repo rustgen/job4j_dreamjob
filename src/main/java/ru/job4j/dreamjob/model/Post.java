@@ -95,3 +95,4 @@ public class Post implements Serializable {
         return Objects.hash(id);
     }
 }
+

@@ -19,3 +19,4 @@ public final class UserSession {
         model.addAttribute("user", user);
     }
 }
+

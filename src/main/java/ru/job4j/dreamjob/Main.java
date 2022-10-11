@@ -51,3 +51,4 @@ public class Main {
         System.out.println("Go to http://localhost:8080/index");
     }
 }
+

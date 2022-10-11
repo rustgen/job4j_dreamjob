@@ -34,3 +34,4 @@ public class CandidateService {
         store.update(candidate);
     }
 }
+

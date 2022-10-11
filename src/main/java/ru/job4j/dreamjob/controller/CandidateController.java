@@ -83,3 +83,4 @@ public class CandidateController {
                 .body(new ByteArrayResource(candidate.getPhoto()));
     }
 }
+

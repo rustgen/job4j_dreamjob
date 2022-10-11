@@ -18,3 +18,4 @@ public class IndexControl {
         return "index";
     }
 }
+

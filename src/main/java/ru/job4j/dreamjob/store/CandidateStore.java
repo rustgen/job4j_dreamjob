@@ -43,3 +43,4 @@ public class CandidateStore {
         candidates.replace(candidate.getId(), candidate);
     }
 }
+

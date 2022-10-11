@@ -66,3 +66,4 @@ public class PostController {
         return "updatePost";
     }
 }
+
