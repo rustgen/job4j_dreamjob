@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+import static ru.job4j.dreamjob.util.UserSession.getSession;
+
 @Controller
 @ThreadSafe
 public class UserController {
@@ -27,14 +29,14 @@ public class UserController {
 
     @GetMapping("/formAddNewUser")
     public String formAddUser(Model model, HttpSession session) {
-        UserSession.getSession(model, session);
+        getSession(model, session);
         model.addAttribute("user", new User(0, "Fill in the field", "Fill in the field"));
         return "addNewUser";
     }
 
     @PostMapping("/registration")
     public String registration(Model model, @ModelAttribute User user, HttpSession session) {
-        UserSession.getSession(model, session);
+        getSession(model, session);
         Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
             model.addAttribute("message", "User with this email already exist");
@@ -45,7 +47,7 @@ public class UserController {
 
     @GetMapping("/success")
     public String success(Model model, HttpSession session) {
-        UserSession.getSession(model, session);
+        getSession(model, session);
         return "success";
     }
 
@@ -57,7 +59,7 @@ public class UserController {
     @GetMapping("/loginPage")
     public String loginPage(Model model, @RequestParam(name = "fail", required = false) Boolean fail,
                             HttpSession session) {
-        UserSession.getSession(model, session);
+        getSession(model, session);
         model.addAttribute("fail", fail != null);
         return "login";
     }
