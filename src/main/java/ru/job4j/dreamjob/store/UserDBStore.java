@@ -54,13 +54,11 @@ public class UserDBStore {
     public Optional<User> findUserByEmailAndPwd(String email, String password) {
         Optional<User> optional = Optional.empty();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement(FIND,
-                     PreparedStatement.RETURN_GENERATED_KEYS)
+             PreparedStatement ps =  cn.prepareStatement(FIND)
         ) {
             ps.setString(1, email);
             ps.setString(2, password);
-            ps.execute();
-            try (ResultSet id = ps.getGeneratedKeys()) {
+            try (ResultSet id = ps.executeQuery()) {
                 if (id.next()) {
                     User user = new User(
                             id.getInt("id"),
