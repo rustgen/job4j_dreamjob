@@ -1,11 +1,14 @@
-package ru.job4j.dreamjob.session;
+package ru.job4j.dreamjob.util;
 
 import org.springframework.ui.Model;
 import ru.job4j.dreamjob.model.User;
 
 import javax.servlet.http.HttpSession;
 
-public class UserSession {
+public final class UserSession {
+
+    private UserSession() {
+    }
 
     public static void getSession(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");

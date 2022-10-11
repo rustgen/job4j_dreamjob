@@ -7,8 +7,7 @@ import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
-import ru.job4j.dreamjob.service.UserService;
-import ru.job4j.dreamjob.session.UserSession;
+import ru.job4j.dreamjob.util.UserSession;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;

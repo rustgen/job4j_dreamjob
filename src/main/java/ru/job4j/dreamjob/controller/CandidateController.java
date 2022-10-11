@@ -12,7 +12,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import ru.job4j.dreamjob.session.UserSession;
+import ru.job4j.dreamjob.util.UserSession;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;

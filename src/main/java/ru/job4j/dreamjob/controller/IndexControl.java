@@ -4,7 +4,7 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.job4j.dreamjob.session.UserSession;
+import ru.job4j.dreamjob.util.UserSession;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,11 +16,5 @@ public class IndexControl {
     public String index(Model model, HttpSession session) {
         UserSession.getSession(model, session);
         return "index";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/loginPage";
     }
 }

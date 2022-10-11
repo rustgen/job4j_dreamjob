@@ -8,7 +8,7 @@ import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import ru.job4j.dreamjob.session.UserSession;
+import ru.job4j.dreamjob.util.UserSession;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;

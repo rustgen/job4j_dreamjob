@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
-import ru.job4j.dreamjob.session.UserSession;
+import ru.job4j.dreamjob.util.UserSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -73,5 +73,11 @@ public class UserController {
         HttpSession session = req.getSession();
         session.setAttribute("user", userDb.get());
         return "redirect:/index";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/loginPage";
     }
 }
