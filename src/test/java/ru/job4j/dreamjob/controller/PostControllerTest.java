@@ -106,11 +106,10 @@ class PostControllerTest {
         assertThat(page, is("updatePost"));
     }
 
-
     @Test
     public void whenAddPosts() {
         User user = new User(1, null, null);
-//        Post post = new Post(1, "New post");
+        /*Post post = new Post(1, "New post");*/
         Post post = new Post(0, "Fill in the field",
                 "Fill in the field", LocalDateTime.now(), new City(0, "Choose the city"));
         List<City> cities = Arrays.asList(
