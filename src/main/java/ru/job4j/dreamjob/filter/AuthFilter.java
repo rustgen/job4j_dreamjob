@@ -11,8 +11,7 @@ import java.util.stream.Stream;
 @Component
 public class AuthFilter implements Filter {
 
-    private Set<String> getRequests() {
-        return Set.of(
+    private final Set<String> uriSet = Set.of(
                 "loginPage",
                 "login",
                 "formAddNewUser",
@@ -20,10 +19,9 @@ public class AuthFilter implements Filter {
                 "success",
                 "fail"
         );
-    }
 
     private boolean checkMapping(String uri) {
-        return getRequests().stream().anyMatch(uri::endsWith);
+        return uriSet.stream().anyMatch(uri::endsWith);
     }
 
     @Override
