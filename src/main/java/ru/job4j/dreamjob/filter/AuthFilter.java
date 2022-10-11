@@ -5,9 +5,26 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Set;
+import java.util.stream.Stream;
 
 @Component
 public class AuthFilter implements Filter {
+
+    private Set<String> getRequests() {
+        return Set.of(
+                "loginPage",
+                "login",
+                "formAddNewUser",
+                "registration",
+                "success",
+                "fail"
+        );
+    }
+
+    private boolean checkMapping(String uri) {
+        return getRequests().stream().anyMatch(uri::endsWith);
+    }
 
     @Override
     public void doFilter(
@@ -17,8 +34,7 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String uri = req.getRequestURI();
-        if (uri.endsWith("loginPage") || uri.endsWith("login") || uri.endsWith("formAddNewUser")
-               || uri.endsWith("registration") || uri.endsWith("success") || uri.endsWith("fail")) {
+        if (checkMapping(uri)) {
             chain.doFilter(req, res);
             return;
         }
